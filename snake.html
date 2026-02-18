@@ -4,6 +4,18 @@
     <title>Snake</title>
   </head>
   <body>
-    Welcome to Snake!
+    <canvas id="gameCanvas" width="300" height="300"></canvas>
   </body>
+  <script>
+    const CANVAS_BORDER_COLOR = 'black';
+    const CANVAS_BACKGROUND_COLOR = 'white';
+
+    const gameCanvas = document.getElementById("gameCanvas");
+    const ctx = gameCanvas.getContext("2d");
+
+    ctx.fillStyle = CANVAS_BACKGROUND_COLOR;
+    ctx.strokeStyle = CANVAS_BORDER_COLOR;
+    ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
+    ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
+  </script>
 </html>
