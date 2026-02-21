@@ -25,11 +25,13 @@
     const ctx = gameCanvas.getContext("2d");
 
     main();
+    createFood();
     document.addEventListener("keydown", changeDirection);
 
     function main() {
       setTimeout(function onTick() {
         clearCanvas();
+        drawFood();
         advanceSnake();
         drawSnake();
         main();
@@ -43,10 +45,31 @@
       ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
     }
 
+    function drawFood() {
+      ctx.fillStyle = 'red';
+      ctx.strokeStyle = 'darkred';
+      ctx.fillRect(foodX, foodY, 10, 10);
+      ctx.strokeRect(foodX, foodY, 10, 10);
+    }
+
     function advanceSnake() {
       const head = {x: snake[0].x + dx, y: snake[0].y + dy};
       snake.unshift(head);
       snake.pop();
+    }
+
+    function randomTen(min, max) {
+      return Math.round((Math.random() * (max-min) + min) / 10) * 10;
+    }
+
+    function createFood() {
+      foodX = randomTen(0, gameCanvas.width - 10);
+      foodY = randomTen(0, gameCanvas.height - 10);
+
+      snake.forEach(function isFoodOnSnake(part) {
+        const foodIsOnSnake = part.x == foodX && part.y == foodY
+        if (foodIsOnSnake) createFood();
+      });
     }
 
     function drawSnake() {
