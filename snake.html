@@ -4,6 +4,7 @@
     <title>Snake</title>
   </head>
   <body>
+    <div id="score">0</div>
     <canvas id="gameCanvas" width="300" height="300"></canvas>
   </body>
   <script>
@@ -20,6 +21,7 @@
 
     let dx = 10;
     let dy = 0;
+    let score = 0;
 
     const gameCanvas = document.getElementById("gameCanvas");
     const ctx = gameCanvas.getContext("2d");
@@ -58,6 +60,9 @@
 
       const didEatFood = snake[0].x === foodX && snake[0].y === foodY;
       if (didEatFood) {
+        score += 1;
+        document.getElementById('score').innerHTML = score;
+
         createFood();
       } else {
         snake.pop();
